@@ -1,50 +1,71 @@
-# React + TypeScript + Vite
+# Video Carousel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based web application for Cozey furniture, featuring a video carousel showcase, newsletter signup, and responsive navigation.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React + TypeScript
+- Tailwind CSS
+- Embla Carousel
+- ShadcnUI Components
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- Video Carousel with autoplay and controls
+- Responsive navigation with mobile support
 
-- Configure the top-level `parserOptions` property like this:
+## Getting Started
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Project Structure
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+src/
+├── components/       # Reusable UI components
+├── layouts/         # Layout components
+├── constants/       # Application constants
+├── lib/            # Utility functions
+└── assets/         # Static assets (SVGs)
+```
+
+## Key Components
+
+- `VideoCarousel`: The carousel implementation leverages Embla Carousel API to provide a seamless video browsing experience. Embla was chosen for its robust touch interactions, built-in autoplay functionality, and efficient slide management. This allows for smooth mobile navigation, custom control integration, and optimized video playback without compromising performance across different browsers.
+
+## Design Decisions
+
+### Component Architecture
+
+- Modular components for reusability and maintainability
+- Separation of concerns with dedicated components for video, navigation, and newsletter
+- Mobile-first approach for responsive design
+
+### Technology Choices
+
+- TypeScript for type safety and better developer experience
+- Tailwind for rapid styling and consistent design system
+- ShadcnUI for accessible, pre-built components
+- Embla Carousel for smooth, touch-friendly video navigation
+
+### Performance Considerations
+
+- Lazy loading of video content
+- Mobile-optimized navigation for the Carousel
+- Showing Skeleton UI while loading the videos
+
+### Note
+
+The current implementation serves videos directly from the public directory for development and testing purposes only. This is not recommended for production environments as it can lead to performance issues, especially when deployed on platforms like Railway where all video requests must be processed through the main server.
+
+### Deployment
+
+I deployed the app to Railway for testing purposes : https://carouselproject-production.up.railway.app/.
+
+While the application runs smoothly locally, the deployed version experiences video playback lag due to videos being served directly from Railway's server. This setup requires all video requests to be processed through the main server, creating performance bottlenecks. For production environments, videos should be hosted on specialized services like AWS S3 or Cloudinary that provide optimized content delivery.
